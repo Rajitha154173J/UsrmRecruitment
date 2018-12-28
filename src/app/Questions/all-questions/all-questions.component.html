@@ -1,0 +1,79 @@
+<div class="page-title">
+    <div class="container">
+        <div class="twelve columns">
+            <h1 *ngIf="!pendingQuestion">All Questions</h1>
+            <h1 *ngIf="pendingQuestion">Pending Questions</h1>
+        </div>
+        <nav class="four columns">
+            <ul class="breadcrumbs">
+                <li><a href="/LeavePlanner">Home</a></li>
+                <li><i class="icon-angle-right"></i></li>
+                <li *ngIf="!pendingQuestion">All Questions</li>
+                <li *ngIf="pendingQuestion">Pending Questions</li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<div class="container">
+    <div class="sixteen columns">
+        <div>
+            <button class="btn" (click)="addNewQuestion()">Add New Question</button>&nbsp;
+            <button class="btn blue" *ngIf="!pendingQuestion" (click)="pendingQuestions()">Pending Questions</button>
+            <button class="btn blue" *ngIf="pendingQuestion" (click)="pendingExit()">All Questions</button>
+        </div>
+
+        <table class="default-table">
+            <thead>
+                <tr>
+                    <th>Question ID</th>
+                    <th>Question Text</th>
+                    <th>Level ID</th>
+                    <th>Type ID</th>
+                    <th>Created Date</th>
+                    <th>Created By</th>
+                    <th>Approved By</th>
+                    <th *ngIf="!pendingQuestion" colspan="3">&nbsp;</th>
+                    <th *ngIf="pendingQuestion" colspan="4">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody *ngIf="!pendingQuestion">
+                <tr *ngFor="let question of all_Question">
+                    <td>{{ question.QuestionId }}</td>
+                    <td class="question">{{ question.QuestionText }}</td>
+                    <td>{{ question.LevelId }}</td>
+                    <td>{{ question.TypeId }}</td>
+                    <td class="createddate">{{ question.CreatedDate }}</td>
+                    <td>{{ question.CreatedBy }}</td>
+                    <td *ngIf="question.ApprovedBy != 0">{{ question.ApprovedBy }}</td>
+                    <td *ngIf="question.ApprovedBy == 0">
+                        <b>Not Approved</b>
+                    </td>
+                    <td><a (click)="deleteQuestion(question); $event.stopPropagation()"><i class="icon-trash"></i></a></td>
+                    <td><a (click)="editQuestion(question); $event.stopPropagation()"><i class="icon-edit"></i></a></td>
+                    <td><a data-toggle="modal" data-target="#viewQuestionModal" (click)="viewQuestion(question)"><i class="icon-eye-open"></i></a></td>
+                </tr>
+            </tbody>
+            <tbody *ngIf="pendingQuestion">
+                <tr *ngFor="let question of all_Question">
+                    <td *ngIf="question.ApprovedBy == 0">{{ question.QuestionId }}</td>
+                    <td *ngIf="question.ApprovedBy == 0" class="question">{{ question.QuestionText }}</td>
+                    <td *ngIf="question.ApprovedBy == 0">{{ question.LevelId }}</td>
+                    <td *ngIf="question.ApprovedBy == 0">{{ question.TypeId }}</td>
+                    <td *ngIf="question.ApprovedBy == 0" class="createddate">{{ question.CreatedDate }}</td>
+                    <td *ngIf="question.ApprovedBy == 0">{{ question.CreatedBy }}</td>
+                    <td *ngIf="question.ApprovedBy == 0">
+                        <b>Not Approved</b>
+                    </td>
+                    <td *ngIf="question.ApprovedBy == 0"><a (click)="deleteQuestion(question); $event.stopPropagation()"><i class="icon-trash"></i></a></td>
+                    <td *ngIf="question.ApprovedBy == 0"><a (click)="editQuestion(question); $event.stopPropagation()"><i class="icon-edit"></i></a></td>
+                    <td *ngIf="question.ApprovedBy == 0"><a data-toggle="modal" data-target="#viewQuestionModal" (click)="viewQuestion(question)"><i class="icon-eye-open"></i></a></td>
+                    <td *ngIf="(question.ApprovedBy == 0)&&(loggedUserDesignation == 1 || loggedUserDesignation == 2 || loggedUserDesignation == 3 || loggedUserDesignation == 4) "><a data-toggle="modal" data-target="#viewQuestionModal"  (click)="approveQuestion(question)">Approve</a></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<div>
+    <app-view-questions></app-view-questions>
+</div>

@@ -1,0 +1,8 @@
+@media only screen and (min-width:992px) {
+    table td:not(.examname) {
+        white-space: nowrap;
+    }
+    table td.examname {
+        width: 100%;
+    }
+}

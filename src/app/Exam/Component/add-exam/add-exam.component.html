@@ -1,0 +1,76 @@
+<div class="page-title">
+  <div class="container">
+    <div class="twelve columns">
+        <h1>Add Exam</h1>
+    </div>
+
+    <nav class="four columns">
+        <ul class="breadcrumbs">
+            <li><a href="/LeavePlanner">Home</a></li>
+            <li><i class="icon-angle-right"></i></li>
+            <li><a routerLink="/allExam">All Exams</a></li>
+            <li><i class="icon-angle-right"></i></li>
+            <li>Add Exam</li>
+        </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="container">
+  <div class="sixteen column">
+    <div class="form">
+      <form [formGroup]="examForm">
+        
+        <div class="field">
+          <label for="ExamName"><b>Exam Name:</b></label>
+          <input type="text" class="valid" [ngClass]="displayFieldCss('ExamName')" name="ExamName" formControlName="ExamName" required>
+        </div>
+
+        <div class="field">
+          <label for="NoOfQuestions"><b>No Of Questions:</b></label>
+          <input type="number" class="valid" [ngClass]="displayFieldCss('NoOfQuestions')" name="NoOfQuestions" formControlName="NoOfQuestions" required>
+        </div>
+      
+        <div class="field">
+          <label for="ExamDate"><b>Exam Date & Time:</b></label>
+          <dp-date-picker [ngClass]="displayFieldCss('ExamDate')" name="ExamDate" formControlName="ExamDate" [(ngModel)]="selectedDate" [config]="datePickerConfig" mode="daytime" theme="dp-material"></dp-date-picker>
+        </div>
+      
+        <div class="field field-last">
+          <label for="Duration"><b>Duration <small>(min)</small>:</b></label>
+          <input type="number" class="valid" [ngClass]="displayFieldCss('Duration')" name="Duration" formControlName="Duration" required>
+        </div>
+      
+        <div class="field">
+        <label for="ProcessId"><b>Process:</b></label>
+          <select formControlName="ProcessId" class="text fixed-with valid" [ngClass]="displayFieldCss('ProcessId')">
+            <option [value]="p.ProcessId" *ngFor="let p of process">{{p.ProcessName}}</option>
+          </select>
+        </div>
+      
+        <div class="field">
+          <label for="LevelId"><b>Level:</b></label>
+          <select formControlName="LevelId" class="text fixed-with valid" [ngClass]="displayFieldCss('LevelId')">
+            <option [value]='1'>Easy</option>
+            <option [value]='2'>Medium</option>
+            <option [value]='3'>Hard</option>
+          </select>
+        </div>
+      
+        <div class="field field-last">
+          <label for="TypeId"><b>Type:</b></label>
+          <select formControlName="TypeId" class="text fixed-with valid" [ngClass]="displayFieldCss('TypeId')">
+            <option [value]='1'>MCQ</option>
+            <option [value]='2'>Essay</option>
+          </select>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div>
+          <button class="btn" (click)="onSubmit()">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

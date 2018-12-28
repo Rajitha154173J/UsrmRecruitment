@@ -1,0 +1,37 @@
+<div class="page-title">
+  <div class="container">
+    <div class="twelve columns">
+        <h1>Start Exam</h1>
+    </div>
+    <nav class="four columns">
+        <ul class="breadcrumbs">
+            <li><a href="/LeavePlanner">Home</a></li>
+            <li><i class="icon-angle-right"></i></li>
+            <li>Start Exam</li>
+        </ul>
+    </nav>
+  </div>
+</div>
+<div class="container">
+  <div class="sixteen columns">
+    <div class="exam-list-wrap">
+      <div class="dividerLatest">
+          <h4>Available Exams</h4>
+          <div class="gDot"></div>
+      </div>
+      <ul class="exam-list" *ngIf="isStart">
+        <li *ngFor="let exam of exams">
+          <i class="icon-file-alt"></i>
+          <span>{{exam.ExamName}}</span>
+          <button class="btn" (click)="tryExam(exam)">Try Now</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="!isStart">
+  not start
+</div>
+
+<!-- popup instruction & confirm --> 

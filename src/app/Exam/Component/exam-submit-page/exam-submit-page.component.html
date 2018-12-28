@@ -1,0 +1,20 @@
+<p>graph</p>
+<p>Your Currnt Avarage</p>
+<p>{{currentAvg}}</p>
+
+<table>
+  <thead>
+    <th>Name</th>
+    <th>Current Avarage</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let top of topTen">
+      <td>{{top.Employee.FullName}}</td>
+      <td>{{top.avarage}}</td>
+    </tr>
+  </tbody>
+</table>
+
+
+<button (click)="tryQuize()">Home</button>

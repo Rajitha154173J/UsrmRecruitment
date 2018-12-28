@@ -1,0 +1,8 @@
+<!-- <ul>
+<li *ngFor="let applicant of applicants">{{applicant.ApplicantName}}</li> -->
+<div class="solid" *ngFor="let applicant of applicants">
+  <p>{{applicant.ApplicantName}}</p>
+<button routerLink="#">View progress</button>
+<button routerLink="/add-interview" (click)="setvalue(applicant)">Asign to interview</button>
+<button routerLink="#">Asign to Exam </button>
+</div>

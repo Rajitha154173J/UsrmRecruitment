@@ -1,0 +1,46 @@
+<div class="page-title"></div>
+
+<div class="quiz" *ngIf="currentQuestin!=null">
+  <div class="digi-clock">{{ellapsedTime}}</div>
+
+  <div class="dividerLatest">
+      <h4>Question {{index+1}} of {{numberOfQz}}</h4>
+      <div class="gDot"></div>
+  </div>
+
+  <div class="question">Design for direct interaction with objects that appear on the screen {{currentQuestin.QuestionText}}</div>
+  <div class="essay-answers">
+      <form [formGroup]="answerForm">
+        <!--<textarea name="Essay" rows="10" cols="30" formControlName="Essay"></textarea>-->
+        <angular-editor name="Essay" formControlName="Essay" [config]="editorConfig"></angular-editor>
+      </form>
+  </div>
+
+  <div *ngIf='numberOfQz-1!=index'>
+    <button class="btn" (click)="next()">Next Question</button>
+  </div>
+  <div *ngIf='numberOfQz-1==index'>
+    <button class="btn" data-toggle="modal" data-target="#submitEssayExamConfirmModal">Submit Exam</button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="submitEssayExamConfirmModal" tabindex="-1" role="dialog" aria-labelledby="submitEssayExamConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="submitEssayExamConfirmModalLabel">Submit Exam</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3>Are you sure you want to submit this exam?</h3>
+      </div>
+      <div class="modal-footer">
+        <button class="btn grey" data-dismiss="modal">Cancel</button>
+        <button class="btn" data-dismiss="modal" (click)="submit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

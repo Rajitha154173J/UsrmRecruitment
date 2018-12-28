@@ -1,0 +1,62 @@
+<div class="page-title">
+  <div class="container">
+      <div class="twelve columns">
+          <h1>All Exams</h1>
+      </div>
+      <nav class="four columns">
+          <ul class="breadcrumbs">
+              <li><a href="/LeavePlanner">Home</a></li>
+              <li><i class="icon-angle-right"></i></li>
+              <li>All Exams</li>
+          </ul>
+      </nav>
+  </div>
+</div>
+
+<div class="container">
+  <div class="sixteen columns">
+    <div>
+        <button class="btn" (click)="addExam()">Add New Exam</button>
+    </div>
+
+    <table class="default-table">
+      <thead>
+        <th>Exam Name</th>
+        <th>Exam Date</th>
+        <th>Duration</th>
+        <th>Created By</th>
+        <th colspan="3"></th>
+      </thead>
+      <tbody>
+        <tr *ngFor="let exam of exams">
+          <td class="examname">{{exam.ExamName}}</td>
+          <td>{{setDate(exam.ExamDate) | date: 'dd-MMM-yyyy hh:mm:aa'}}</td>
+          <td>{{exam.Duration}}</td>
+          <td>{{exam.created}}</td>
+          <td><a data-toggle="modal" data-target="#deleteExamConfirmModal"><i class="icon-trash"></i></a></td><!--(click)="deleteExam(exam.ExamId)"-->
+          <td><a (click)="editExam(exam.ExamId)"><i class="icon-edit"></i></a></td>
+          <td><a (click)="examDetail(exam.ExamId)"><i class="icon-eye-open"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteExamConfirmModal" tabindex="-1" role="dialog" aria-labelledby="deleteExamConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteExamConfirmModalLabel">Delete Exam</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3>Are you sure you want to delete this exam?</h3>
+      </div>
+      <div class="modal-footer">
+        <button class="btn grey" data-dismiss="modal">Cancel</button>
+        <button class="btn">Delete</button>
+      </div>
+    </div>
+  </div>
+</div>

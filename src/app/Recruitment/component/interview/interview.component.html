@@ -1,0 +1,39 @@
+<form [formGroup]="interviewForm">
+
+<p>
+  <label for="InterviewName">Interview Name</label>
+ <input type="text" formControlName="InterviewName">
+</p>
+
+<p class="dropdown">
+<label for= "panel">Select panel</label>
+<ng-multiselect-dropdown
+[placeholder]="'Interview Panel'" [data]="dropdownList" formControlName="Panel" [settings]="dropdownSettings"
+(onSelect)="onItemSelect($event)"
+>
+</ng-multiselect-dropdown>
+</p>
+
+<p>
+  <label for="InterviewDate">Interview Date:</label>
+  <input type="date" formControlName="InterviewDate">
+</p>
+<p>
+  <label for="fromTime">Start Time:</label>
+  <input type="time" formControlName="FromTime">
+</p>
+<p>
+  <label for="toTime">End Time:</label>
+  <input type="time" formControlName="ToTime">
+</p>
+
+<p>
+<label for="type">Interview Type:</label>
+<select formControlName="TypeId">
+<option *ngFor="let type of types" [value]="type.TypeId">{{type.TypeName}}</option>
+</select>
+</p>
+
+<button type="submit" (click)="SubmitForm()"> submit</button>
+</form>
+

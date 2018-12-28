@@ -1,0 +1,41 @@
+<div *ngIf="isStart">
+  <div *ngIf="currentQuestin!=null">
+    <P>{{ellapsedTime}}</P>
+    <p>Question {{index+1}} of {{numberOfQz}}</p>
+  <p>
+    {{currentQuestin.QuestionText}}
+  </p>
+  
+  <form [formGroup]="answerForm" (change)="selectAnswer()">
+    <input type="radio" name="Mcq" value="1" formControlName="Mcq">{{currentQuestin.SudegstionOne}}<br>
+    <input type="radio" name="Mcq" value="2" formControlName="Mcq">{{currentQuestin.SudegstionTwo}}<br>
+    <input type="radio" name="Mcq" value="3" formControlName="Mcq">{{currentQuestin.SudegstionThree}}<br>
+    <input type="radio" name="Mcq" value="4" formControlName="Mcq">{{currentQuestin.SudegstionOne}}<br>
+  </form>
+  
+  <div *ngIf='numberOfQz-1!=index'>
+    <button (click)="next()">next</button>
+  </div>
+  <div *ngIf='numberOfQz-1==index'>
+    <button (click)="submit()">Submit</button>
+  </div>
+  
+  </div>
+</div>
+
+<div *ngIf="!isStart">
+  <form [formGroup]="examForm" (submit)="getQuestions()">
+    
+    <label for="LevelId"><b>Level:</b></label>
+    <select formControlName="LevelId" class="form-control">
+      <option [value]='1'>Easy</option>
+      <option [value]='2'>Medium</option>
+      <option [value]='3'>Hard</option>
+    </select>
+
+    <label for="NoOfQuestions"><b>No Of Questions:</b></label>
+    <input type="number" placeholder="Enter No Of Questions" name="NoOfQuestions" formControlName="NoOfQuestions" required>
+
+    <button type="submit">Submit</button>
+  </form>
+</div>

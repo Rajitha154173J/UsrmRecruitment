@@ -1,0 +1,65 @@
+<!-- Modal -->
+<div class="modal fade" id="viewApplicantModal" tabindex="-1" role="dialog" aria-labelledby="viewApplicantModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewApplicantModalLabel">Applicant Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="default-table border-none question-table">
+          <tr>
+            <td>Applicant ID</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.ApplicantId }}</td>
+          </tr>
+          <tr>
+            <td>Applicant Name</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.ApplicantName }}</td>
+          </tr>
+          <tr>
+            <td>Process Id</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.ProcessId }}</td>
+          </tr>
+          <tr>
+            <td>NIC</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.NIC }}</td>
+          </tr>
+          <tr>
+            <td>Email</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.Email }}</td>
+          </tr>
+          <tr>
+            <td>Date Of Birth</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.DateOfBirth }}</td>
+          </tr>
+          <tr>
+            <td>Home Address</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.HomeAddress }}</td>
+          </tr>
+          <tr>
+            <td>Mobile</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.Mobile }}</td>
+          </tr>
+          <tr>
+            <td>Gender</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.Gender }}</td>
+          </tr>
+          <tr>
+            <td>Institute</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.Institute }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

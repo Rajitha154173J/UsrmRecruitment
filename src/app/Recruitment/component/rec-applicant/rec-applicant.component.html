@@ -1,0 +1,118 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-1"></div>
+
+    <div class="application col-10 ">
+      <form [formGroup]="applicationForm">
+        <!-- first name & last Name -->
+        <div class="row">
+          <div class="col-md-5 form-group">
+
+            <label for="ApplicantName"><strong>Name:</strong> </label>
+            <input type="text" class="form-control" formControlName="ApplicantName" required>
+          </div>
+
+          <div class="col-md-2"></div>
+
+          <div class="col-md-5">
+
+            <label for="Email"><strong> Email:</strong> </label>
+            <input type="Email" class="form-control" formControlName="Email" required>
+          </div>
+        </div>
+        <!-- email -->
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="HomeAddress"><strong> Home Address :</strong> </label>
+            <input type="text" class="form-control" formControlName="HomeAddress" required>
+          </div>
+          <div class="col-md-0"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 form-group">
+            <label for="proccess"><strong> Proccess:</strong> </label>
+            <select (change)="getDesignation($event)" class="form-control" formControlName="ProcessID" required>
+                    <option *ngFor="let proccess of proccesses" [value]="proccess.ProcessId" >{{proccess.ProcessName}}</option>
+                </select>
+          </div>
+
+          <div class="col-md-4" *ngIf="!hide">
+            <label for="proccess"><strong> Designation:</strong> </label>
+            <select class="form-control" formControlName="DesignationID" required>
+            <option *ngFor="let  processDesignation of  processDesignations" [value]=" processDesignation.designationId" >{{ processDesignation.Designation}}</option>
+        </select>
+
+
+          </div>
+
+          <div class="col-md-3">
+            <!-- <label for="CreatedBy"><strong> Created By:</strong> </label>
+            <input type="text" formControlName="CreatedBy" class="form-control" [readonly]="true"> -->
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 form-group">
+            <label for="Mobile"><strong> Mobile No:</strong> </label>
+            <input type="text" class="form-control" formControlName="Mobile" required>
+          </div>
+
+          <div class="col-md-2"></div>
+
+          <div class="col-md-5">
+            <label for="Gender"><strong> Gender:</strong> </label><br/>
+            <input type="radio" formControlName="Gender" value="Male"> Male
+            <input type="radio" formControlName="Gender" value="Female"> Female<br>
+
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 form-group">
+            <label for="NIC"><strong> NIC:</strong> </label>
+            <input type="text" class="form-control" formControlName="NIC" required>
+          </div>
+
+          <div class="col-md-2"></div>
+
+          <div class="col-md-5">
+            <label for="DateOfBirth"><strong> Date Of Birth:</strong> </label>
+            <input type="date" formControlName="DateOfBirth" class="form-control" required>
+          </div>
+        </div>
+
+
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="Institute"><strong> Institute:</strong> </label>
+            <input type="text" class="form-control" formControlName="Institute" required>
+          </div>
+          <div class="col-md-0"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <pre> <label for="cv"><strong> Attached CV: </strong> </label>
+              <input type="file" formControlName="CV" id="CVLink" name="cv" accept="pdf/*" style="background-color:white" (change)="onFileChange($event)" ></pre>
+
+          </div>
+          <div class="col-md-0"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-5 "></div>
+          <div class="col-md-2 form-group">
+            <button type="button" class="btn btn-outline-success" (click)="applicationCreate()">Submit</button>
+          </div>
+          <div class="col-md-5"></div>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="col-1"></div>
+
+  </div>
+</div>

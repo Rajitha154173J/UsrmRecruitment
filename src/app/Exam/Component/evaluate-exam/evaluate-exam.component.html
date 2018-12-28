@@ -1,0 +1,15 @@
+<div *ngIf="currentAnswer!=null">
+  <P>{{currentAnswer.Question.QuestionText}}</P>
+  <P>{{currentAnswer.Question.SampleAnwser}}</P>
+  <P>{{currentAnswer.Answer}}</P>
+
+  <form [formGroup]="marksForm">
+      <label for="Marks"><b>Add your marks:</b></label>
+      <input type="number" placeholder="Enter Marks" name="marks" formControlName="Marks" required>/100
+  </form>
+    
+  <button *ngIf="noOfAnswers-1!=index" (click)="next()">Next</button>
+  <button *ngIf="noOfAnswers-1==index" (click)="submit()">Submit</button>
+</div>
+
+

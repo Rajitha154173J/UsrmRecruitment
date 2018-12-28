@@ -1,0 +1,108 @@
+<div class="page-title">
+    <div class="container">
+        <div class="twelve columns">
+            <h1 *ngIf="examApplicants">Applicants For Exam</h1>
+            <h1 *ngIf="!examApplicants">Applicants For Interviews</h1>
+        </div>
+
+        <nav class="four columns">
+            <ul class="breadcrumbs">
+
+                <li><a href="/LeavePlanner">Home</a></li>
+                <li><i class="icon-angle-right"></i></li>
+                <li *ngIf="examApplicants">Exams</li>
+                <li *ngIf="!examApplicants">Interviews</li>
+            </ul>
+        </nav>
+    </div>
+</div>
+<!-- <app-view-question></app-view-question> -->
+<!-- <button (click)="ngxSmartModalService.getModal('popupViewQuestion').open()">Open myModal 1</button> -->
+
+<div class="container">
+    <div class="sixteen columns">
+        <div>
+            <button class="btn red" (click)="setExamApplicants()"><i class="fas fa-sync-alt"></i> All Exams</button>
+            <button class="btn red" (click)="examApplicantsExit()"><i class="fas fa-list-ul"></i> All Interviews</button>
+        </div>
+
+        <table class="default-table" *ngIf="examApplicants">
+            <thead>
+                <tr>
+                    <th>Exam ID</th>
+                    <th>Exam Name</th>
+                    <th>Exam Date</th>
+                    <th>Applicant Name</th>
+                    <th>Duration</th>
+                    <th>Created By</th>
+                    <th>Process Id</th>
+                    <th>Phone Call</th>
+                    <th>Send Email</th>
+                    <th colspan="1">&nbsp;</th>
+                    <th colspan="1">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let applicant of all_ExamApplicants">
+                    <td>{{ applicant.ExamId }}</td>
+                    <td class="question">{{ applicant.ExamName }}</td>
+                    <td class="createddate">{{ applicant.ExamDate }}</td>
+                    <td>{{ applicant.ApplicantName }}</td>
+                    <td>{{ applicant.Duration }}</td>
+                    <td>{{ applicant.CreatedBy }}</td>
+                    <td>{{ applicant.ProcessId}}</td>
+                    <td>{{ applicant.IsCalled}}</td>
+                    <td>{{ applicant.IsSendEmail}}</td>
+
+                    <td><a data-toggle="modal" data-target="#viewApplicantModal" (click)="viewExamApplicant(applicant);"><i class="icon">View Applicant</i></a></td>
+                    <td><a data-toggle="modal" data-target="#viewExamModal" (click)="viewExam(applicant);"><i class="icon">View Exam</i></a></td>
+
+                </tr>
+            </tbody>
+        </table>
+
+        <table class="default-table" *ngIf="!examApplicants">
+            <thead>
+                <tr>
+                    <th>Interview Id</th>
+                    <th>Interview Name</th>
+                    <th>Interview Date</th>
+                    <th>Applicant Name</th>
+                    <th>Institute</th>
+                    <th>NIC</th>
+                    <th>Process Id</th>
+                    <th>Phone Call</th>
+                    <th>Send Email</th>
+                    <th colspan="1">&nbsp;</th>
+                    <th colspan="1">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let applicant of all_InterviewApplicants">
+                    <td>{{ applicant.InterviewId }}</td>
+                    <td class="question">{{ applicant.InterviewName }}</td>
+                    <td class="createddate">{{ applicant.InterviewDate }}</td>
+                    <td>{{ applicant.ApplicantName }}</td>
+                    <td>{{ applicant.Institute }}</td>
+                    <td>{{ applicant.NIC }}</td>
+                    <td>{{ applicant.ProcessId}}</td>
+                    <td>{{ applicant.IsCalled}}</td>
+                    <td>{{ applicant.IsSendEmail}}</td>
+
+                    <td><a data-toggle="modal" data-target="#viewApplicantModal" (click)="viewInterviewApplicant(applicant);"><i class="icon">View Applicant</i></a></td>
+                    <td><a data-toggle="modal" data-target="#viewInterviewModal" (click)="viewInterview(applicant);"><i class="icon">View Interview</i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</div>
+<div>
+    <app-view-applicant></app-view-applicant>
+</div>
+<div>
+    <app-view-interview></app-view-interview>
+</div>
+<div>
+    <app-view-exam></app-view-exam>
+</div>

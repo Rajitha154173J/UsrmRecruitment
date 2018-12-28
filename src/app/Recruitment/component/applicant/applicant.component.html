@@ -1,0 +1,66 @@
+<!-- <div id="body">
+    <section class="content-wrapper main-content clear-fix">
+
+    <div class="container">
+    <div class="sixteen columns">
+
+                <input Id="relResrc1" placeholder="Search Employee" class="margin-top margin-bottom-10" style="padding-left: 15px; width: 23.9% !important;" type="text" value="" />
+
+            </div>
+    <div class="sixteen columns">
+        <table class="default-table sortable graph-tabel" id="resultTable">
+            <tr>
+                <th>Applicant Name</th>
+                <th>Process Name</th>
+                <th>Designation</th>
+                <th>Action</th>
+
+
+            </tr>
+
+
+        </table>
+
+    </div>
+
+
+ </div>
+</section>
+</div> -->
+<div class="jumbotron">
+    <div class="form-group has-success">
+        <!-- <label class="form-control-label" for="inputSuccess1">Valid input</label> -->
+        <input type="text" placeholder="search" class="form-control is-valid roundButton" id="inputValid">
+        <!-- <div class="valid-feedback">Success! You've done it.</div> -->
+      </div>
+
+  <div>
+    <!-- <p>Details</p> -->
+</div>
+
+      <table class="table table-hover table-active">
+          <thead>
+            <tr>
+              <th scope="col">Applicant Name</th>
+              <th scope="col">Process Name</th>
+              <th scope="col">Designation</th>
+              <th scope="col">Action</th>
+
+
+            </tr>
+          </thead>
+          <tbody>
+
+
+         <tr class="table-light" *ngFor="let applicant of applicants">
+              <td>{{applicant.ApplicantName}}</td>
+              <td>{{applicant.processName}}</td>
+              <td>{{applicant.Designation}}</td>
+              <td><button type="button" class="btn btn-warning roundButton" routerLink="/edit-applicant/{{applicant.ApplicantId}}">Edit</button>
+                <button type="button" class="btn btn-danger roundButton" style="margin-left:5px;" (click)="delect(applicant)" >Delete</button>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+</div>

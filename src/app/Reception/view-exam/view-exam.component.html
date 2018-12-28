@@ -1,0 +1,50 @@
+<!-- Modal -->
+<div class="modal fade" id="viewExamModal" tabindex="-1" role="dialog" aria-labelledby="viewExamModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewExamModalLabel">Interview Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="default-table border-none question-table">
+          <tr>
+            <td>Exam Id</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.ExamId }}</td>
+          </tr>
+          <tr>
+            <td>Exam Name</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.ExamName }}</td>
+          </tr>
+          <tr>
+            <td>Applicant Name</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.ApplicantName }}</td>
+          </tr>
+          <tr>
+            <td>Exam Date</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.ExamDate }}</td>
+          </tr>
+          <tr>
+            <td>Is Attend</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.IsAttend }}</td>
+          </tr>
+          <tr>
+            <td>Is Marked</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.IsMark }}</td>
+          </tr>
+          <tr>
+            <td>Is Submit</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.IsSubmit }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

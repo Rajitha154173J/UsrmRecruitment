@@ -1,0 +1,211 @@
+<div class="page-title">
+  <div class="container">
+    <div class="twelve columns">
+        <h1>Add Questions</h1>
+    </div>
+
+    <nav class="four columns">
+        <ul class="breadcrumbs">
+            <li><a href="/LeavePlanner">Home</a></li>
+            <li><i class="icon-angle-right"></i></li>
+            <li>Add Questions</li>
+        </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="container add-question">
+  <div class="sixteen column">
+    <div class="form">
+      <form (submit)="onSubmit()" [formGroup]="addForm">
+        <div class="field">
+          <label for="TypeId"><b>Question Type:</b></label>
+          <select formControlName="TypeId" class="text fixed-with valid">
+            <option  [value]=1>MCQ</option>
+            <option  [value]=2>Essay</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="LevelId"><b>Question Level:</b></label>
+          <select formControlName="LevelId" class="text fixed-with valid">
+            <option  [value]=1>Level 1</option>
+            <option  [value]=2>Level 2</option>
+            <option  [value]=3>Level 3</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="SubjectId"><b>Subject Area:</b></label>
+          <select formControlName="SubjectId" class="text fixed-with valid">
+            <option  [value]=1002>C#</option>
+            <option  [value]=1003>MySQL</option>
+            <option  [value]=1004>JavaScript</option>
+            <option  [value]=1005>OOP</option>
+          </select>
+        </div>
+        <div class="field field-last">
+          <label for="DesignationId"><b>Question For:</b></label>
+          <select formControlName="DesignationId" class="text fixed-with valid">
+            <option *ngFor="let designation of allDesignations" [value]="designation.Id">
+              {{designation.Designation}}
+            </option>
+          </select>
+        </div>
+        <div class="field field-full">
+          <label for="QuestionText"><b>Question Text:</b></label>
+          <input type="text" class="valid" name="QuestionText" formControlName="QuestionText">
+        </div>
+        <div class="field field-full" *ngIf="addForm.value.TypeId==2">
+          <label for="SampleAnwser"><b>Sample Answer:</b></label>
+          <input type="text" class="valid" name="SampleAnwser" formControlName="SampleAnwser">
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div *ngIf="addForm.value.TypeId==1">
+          <div class="field">
+            <label for="SudegstionOne"><b>Suggestion (1):</b></label>
+            <input type="text" class="valid" name="SudegstionOne" formControlName="SudegstionOne">
+          </div>
+
+          <div class="field">
+            <label for="SudegstionTwo"><b>Suggestion (2):</b></label>
+            <input type="text" class="valid" name="SudegstionTwo" formControlName="SudegstionTwo">
+          </div>
+
+          <div class="field">
+            <label for="SudegstionThree"><b>Suggestion (3):</b></label>
+            <input type="text" class="valid" name="SudegstionThree" formControlName="SudegstionThree">
+          </div>
+
+          <div class="field field-last">
+            <label for="SudegstionFour"><b>Suggestion (4):</b></label>
+            <input type="text" class="valid" name="SudegstionFour" formControlName="SudegstionFour">
+          </div>
+        </div>
+
+        <div class="clearfix"></div>
+
+        <div class="mcq-answers" *ngIf="addForm.value.SudegstionOne && addForm.value.SudegstionTwo && addForm.value.SudegstionThree && addForm.value.SudegstionFour">
+          <label class="d-block"><b>Select the correct answer  :</b></label>
+          
+          <label [class.selected]="cb1.checked">
+            <input #cb1 type="checkbox" value=1 (change)="logCheckbox(cb1)"> {{addForm.value.SudegstionOne}}
+          </label>
+          <label [class.selected]="cb2.checked">
+            <input #cb2 type="checkbox" value=2 (change)="logCheckbox(cb2)"> {{addForm.value.SudegstionTwo}}
+          </label>
+          <label [class.selected]="cb3.checked">
+            <input #cb3 type="checkbox" value=3 (change)="logCheckbox(cb3)"> {{addForm.value.SudegstionThree}}
+          </label>
+          <label [class.selected]="cb4.checked">
+            <input #cb4 type="checkbox" value=4 (change)="logCheckbox(cb4)"> {{addForm.value.SudegstionFour}}
+          </label>
+        </div>
+
+        <div class="clearfix"></div>
+      
+        <div>
+          <button type="submit" class="btn red" data-toggle="modal" data-target="#addQuestionConfirmModal">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="addQuestionConfirmModal" tabindex="-1" role="dialog" aria-labelledby="addQuestionConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="addQuestionConfirmModalLabel">Question Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div *ngIf="(submittedEssay || submittedMCQ)">
+          <table class="default-table border-none question-table">
+            <tr>
+              <td>Question Type</td>
+              <td>:</td>
+              <td>
+                <span [hidden]=" addForm.value.TypeId  == 2">MCQ</span>
+                <span [hidden]=" addForm.value.TypeId  == 1">Essay</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Question Level</td>
+              <td>:</td>
+              <td>
+                <span [hidden]=" addForm.value.LevelId  != 1">Level 1</span>
+                <span [hidden]=" addForm.value.LevelId  != 2">Level 2</span>
+                <span [hidden]=" addForm.value.LevelId  != 3">Level 3</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Question Text</td>
+              <td>:</td>
+              <td>{{ addForm.value.QuestionText }}</td>
+            </tr>
+            <tr [hidden]=" addForm.value.TypeId  == 1">
+              <td>Sample Answer</td>
+              <td>:</td>
+              <td>{{ addForm.value.SampleAnwser }}</td>
+            </tr>
+            <tr [hidden]="addForm.value.TypeId  == 2">
+              <td>Sudegstion (1)</td>
+              <td>:</td>
+              <td>{{ addForm.value.SudegstionOne }}</td>
+            </tr>
+            <tr [hidden]="addForm.value.TypeId  == 2">
+              <td>Sudegstion (2)</td>
+              <td>:</td>
+              <td>{{ addForm.value.SudegstionTwo }}</td>
+            </tr>
+            <tr [hidden]="addForm.value.TypeId  == 2">
+              <td>Sudegstion (3)</td>
+              <td>:</td>
+              <td>{{ addForm.value.SudegstionThree }}</td>
+            </tr>
+            <tr [hidden]="addForm.value.TypeId  == 2">
+              <td>Sudegstion (4)</td>
+              <td>:</td>
+              <td>{{ addForm.value.SudegstionFour }}</td>
+            </tr>
+          </table>
+
+          <button class="btn red" data-dismiss="modal">Edit</button>
+          <button class="btn green" data-dismiss="modal" (click)="confirmAndSend()">Confirm and send</button>
+        </div>
+        <div class="clearfix"></div>
+      
+        <div *ngIf="similarQuestions != 0" class="similar-questions">
+          <div *ngIf="submittedEssay">
+
+            <div class="msg">
+              <p>Here are some of the similar ESSAY quesions we have in the repo</p>
+              <p>Checkout whether you are submitting a similar</p>
+            </div>
+            <ol>
+              <li *ngFor="let question of similarQuestions">
+                {{question.QuestionText}} <span>{{question.SampleAnwser*100}}% matched</span>
+              </li>
+            </ol>
+          </div>
+  
+          <div *ngIf="submittedMCQ">
+
+            <div class="msg">
+              <p>There are some some of the similar MCQ quesions we have in the repo</p>
+              <p>Checkout whether you are submitting a similar</p>
+            </div>
+            <ol>
+              <li *ngFor="let question of similarQuestions">
+                {{question.QuestionText}} <span>{{question.SampleAnwser*100}}% matched</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</div>

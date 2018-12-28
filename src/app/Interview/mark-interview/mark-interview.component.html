@@ -1,0 +1,65 @@
+<div class="page-title">
+  <div class="container">
+    <div class="twelve columns">
+      <h1>Mark Interview</h1>
+    </div>
+
+    <nav class="four columns">
+      <ul class="breadcrumbs">
+        <li><a href="/LeavePlanner">Home</a></li>
+        <li><i class="icon-angle-right"></i></li>
+        <li>Mark Interview</li>
+      </ul>
+    </nav>
+  </div>
+</div>
+
+<div class="container add-question">
+  <div class="sixteen column">
+    <div class="form">
+      <form (submit)="onSubmit()" [formGroup]="addForm">
+
+        <div class="field field-full">
+          <label for="MarkId"><b>MarkId:</b></label>
+          <input type="text" class="valid" name="MarkId" formControlName="MarkId">
+          <label for="IntervieweeId"><b>IntervieweeId:</b></label>
+          <input type="text" class="valid" name="IntervieweeId" formControlName="IntervieweeId">
+          <label for="InterviewerId"><b>InterviewerId:</b></label>
+          <input type="text" class="valid" name="InterviewerId" formControlName="InterviewerId">
+          <label for="InterviewId"><b>InterviewId:</b></label>
+          <input type="text" class="valid" name="InterviewId" formControlName="InterviewId">
+          <label for="Comments"><b>Comments:</b></label>
+          <input type="text" class="valid" name="Comments" formControlName="Comments">
+          
+        </div>
+
+        <div class="field field-full">
+          <table class="default-table">
+            <thead>
+              <tr>
+                <th>Subject</th>
+                <th>Score</th>
+                <th>Comments</th>
+              </tr>
+            </thead>
+            <tbody>
+              <div formArrayName="markScore" *ngFor="let markScore of addForm.get('markScore').controls; let i = index;">
+                <div [formGroupName]="i">
+                  <tr>
+                    <td *ngIf="all_subjects"><input type="text" class="valid" formControlName="SubjectName"></td>
+                    <td><input type="number" name="Score" min="0" max="10" placeholder="0" formControlName="Score"></td>
+                    <td><input type="text" class="valid" name="SubjectComments" formControlName="SubjectComments"></td>
+                  </tr>
+                  <!-- <button type="button" (click)="addNext()">Add Next</button> -->
+                  
+                </div>
+              </div>
+            </tbody>
+          </table>
+        </div>
+        <button type="submit" class="btn red">Submit</button>
+      </form>
+
+    </div>
+  </div>
+</div>

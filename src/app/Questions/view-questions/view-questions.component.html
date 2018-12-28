@@ -1,0 +1,103 @@
+<!-- Modal -->
+<div class="modal fade" id="viewQuestionModal" tabindex="-1" role="dialog" aria-labelledby="viewQuestionModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewQuestionModalLabel">Question Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="default-table border-none question-table">
+          <tr>
+            <td>Question ID</td>
+            <td>:</td>
+            <td>{{ selectedQuestion.QuestionId }}</td>
+          </tr>
+          <tr>
+            <td>Question Type</td>
+            <td>:</td>
+            <td>
+              <span [hidden]=" selectedQuestion.TypeId  == 2">MCQ</span>
+              <span [hidden]=" selectedQuestion.TypeId  == 1">Essay</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Question Level</td>
+            <td>:</td>
+            <td>
+              <span [hidden]=" selectedQuestion.LevelId  != 1">Level 1</span>
+              <span [hidden]=" selectedQuestion.LevelId  != 2">Level 2</span>
+              <span [hidden]=" selectedQuestion.LevelId  != 3">Level 3</span>
+              <span [hidden]=" selectedQuestion.LevelId  != 4">Level 4</span>
+              <span [hidden]=" selectedQuestion.LevelId  != 5">Level 5</span>
+            </td>
+          </tr>
+          <tr>
+            <td>Question Text</td>
+            <td>:</td>
+            <td>{{ selectedQuestion.QuestionText }}</td>
+          </tr>
+          <tr [hidden]="selectedQuestion.TypeId  == 1">
+            <td>Sample Answer</td>
+            <td>:</td>
+            <td>{{ selectedQuestion.SampleAnwser }}</td>
+          </tr>
+          <tr [hidden]="selectedQuestion.TypeId  == 2">
+            <td>Sudegstion (1)</td>
+            <td>:</td>
+            <td>{{ selectedQuestion.SudegstionOne }}</td>
+          </tr>
+          <tr [hidden]="selectedQuestion.TypeId  == 2">
+            <td>Sudegstion (2)</td>
+            <td>:</td>
+            <td>{{ selectedQuestion.SudegstionTwo }}</td>
+          </tr>
+          <tr [hidden]="selectedQuestion.TypeId  == 2">
+            <td>Sudegstion (3)</td>
+            <td>:</td>
+            <td>{{ selectedQuestion.SudegstionThree }}</td>
+          </tr>
+          <tr [hidden]="selectedQuestion.TypeId  == 2">
+            <td>Sudegstion (4)</td>
+            <td>:</td>
+            <td>{{ selectedQuestion.SudegstionFour }}</td>
+          </tr>
+        </table>
+
+        <button type="button" class="btn red" data-dismiss="modal" (click)="editQuestion(question)">Edit</button>
+        <button type="button" class="btn green" data-dismiss="modal" (click)="approveQuestionConfirmed(question)">Approve</button>
+      
+        <div class="clearfix"></div>
+      
+        <div *ngIf="similarQuestions!=0" class="similar-questions">
+          <div *ngIf="selectedQuestion.TypeId==2">
+
+            <div class="msg">
+              <p>Here are some of the similar ESSAY quesions we have in the repo</p>
+              <p>Checkout whether you are submitting a similar</p>
+            </div>
+            <ol>
+              <li *ngFor="let question of similarQuestions">
+                {{question.QuestionText}} <span>{{question.SampleAnwser*100}}% matched</span>
+              </li>
+            </ol>
+          </div>
+  
+          <div *ngIf="selectedQuestion.TypeId==1">
+
+            <div class="msg">
+              <p>There are some some of the similar MCQ quesions we have in the repo</p>
+              <p>Checkout whether you are submitting a similar</p>
+            </div>
+            <ol>
+              <li *ngFor="let question of similarQuestions">
+                {{question.QuestionText}} <span>{{question.SampleAnwser*100}}% matched</span>
+              </li>
+            </ol>
+          </div>
+        </div>
+      
+      </div>
+    </div>
+  </div>
+</div>

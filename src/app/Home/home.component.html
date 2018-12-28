@@ -1,0 +1,15 @@
+<div *ngIf="isLoad">
+  <div *ngIf="!isEmmployee">
+    <form [formGroup]="externalLogin" (submit)="login()">
+      <label for="Email"><b>Enter Your Email:</b></label>
+      <input type="email" placeholder="Enter Your Email" name="Email" formControlName="Email" required>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+  
+  <div *ngIf="isEmmployee">
+    <button routerLink="/allExamEvent">ExamEvent</button>
+    <button routerLink="/allExam">Exam</button>
+    <button routerLink="/employeeExam">Try Employee Exam</button>
+  </div>
+</div>

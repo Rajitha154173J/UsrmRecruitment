@@ -1,0 +1,7 @@
+.supervisor table tr td:nth-child(1) {
+    width: 100%;
+}
+.supervisor table tr td:nth-child(2),
+.supervisor table tr th:nth-child(2) {
+    white-space: nowrap;
+}

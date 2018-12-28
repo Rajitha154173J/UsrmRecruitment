@@ -1,0 +1,40 @@
+<!-- Modal -->
+<div class="modal fade" id="viewInterviewModal" tabindex="-1" role="dialog" aria-labelledby="viewInterviewModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewInterviewModalLabel">Interview Details</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <table class="default-table border-none question-table">
+          <tr>
+            <td>Interview Id</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.InterviewId }}</td>
+          </tr>
+          <tr>
+            <td>Interview Name</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.InterviewName }}</td>
+          </tr>
+          <tr>
+            <td>Interview Date</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.InterviewDate }}</td>
+          </tr>
+          <tr>
+            <td>Process Id</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.ProcessId }}</td>
+          </tr>
+          <tr>
+            <td>Is Marked</td>
+            <td>:</td>
+            <td>{{ selectedApplicant.IsMarked }}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

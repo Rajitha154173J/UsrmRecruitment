@@ -1,0 +1,82 @@
+<div class="page-title">
+  <div class="container">
+    <div class="twelve columns">
+        <h1>Exam Detail</h1>
+    </div>
+
+    <nav class="four columns">
+        <ul class="breadcrumbs">
+            <li><a href="/LeavePlanner">Home</a></li>
+            <li><i class="icon-angle-right"></i></li>
+            <li><a routerLink="/allExam">All Exams</a></li>
+            <li><i class="icon-angle-right"></i></li>
+            <li>Exam Detail</li>
+        </ul>
+    </nav>
+  </div>
+</div>
+
+
+
+<div class="container">
+  <div class="seven columns">
+    <h3>All Applicants</h3>
+    <ul class="enroll-list enroll">
+      <li *ngFor="let applicant of applicants" (click)="enroll(applicant.ApplicantId)">
+        <span>{{applicant.ApplicantName}}</span>
+        <button class="btn green">Enroll<i class="icon-arrow-right"></i></button>
+      </li>
+    </ul>
+  </div>
+  <div class="two columns">
+      &nbsp;
+  </div>
+  <div class="seven columns">
+    <h3>Enrolled Applicants</h3>
+    <ul class="enroll-list unenroll">
+      <li *ngFor="let applicant of enrollApplicants" (click)="unEnroll(applicant.ApplicantId)">
+        <span>{{applicant.ApplicantName}}</span>
+        <button class="btn grey"><i class="icon-arrow-left"></i>UnEnroll</button>
+      </li>
+    </ul>
+  </div>
+  <div class="sixteen columns">
+    <br>
+    <hr>
+    <br>
+  </div>
+  <div class="seven columns supervisor" *ngIf="exam.TypeId==2">
+    <div class="form">
+      <h3>Supervisor</h3>
+      <form (submit)="addSupervisor()" [formGroup]="supperviserForm">
+        <div class="field">
+          <select formControlName="ResourceCode" class="text fixed-with valid">
+            <option [value]="e.ResourceCode" *ngFor="let e of employee">{{e.FullName}}</option>
+          </select>
+        </div>
+        <button class="btn green" type="submit">Add Supervisor</button>
+      </form>
+    </div>
+    <table class="default-table">
+      <thead>
+        <tr>
+          <th>Supervisor Name</th>
+          <th>Resource Code</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let super of supervisorPanel">
+          <td>{{super.EmployeeName}}</td>
+          <td>{{super.ResourceCode}}</td>
+          <td><a (click)="removeSupervisor(super.SupervisorId)"><i class="icon-trash"></i></a></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="clearfix"></div>
+    <br>
+    <div>
+      <button routerLink="/allExam" class="btn">Exit</button>
+    </div>
+  </div>
+</div>

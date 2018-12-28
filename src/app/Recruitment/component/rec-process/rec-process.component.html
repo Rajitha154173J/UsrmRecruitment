@@ -1,0 +1,113 @@
+<div class="container">
+  <div class="row">
+
+    <div class="col-1"></div>
+
+    <div class="application col-10 ">
+      <form [formGroup]="proccessForm">
+
+        <div class="row">
+          <div class="col-md-5 form-group">
+
+            <label for="ProcessName"><strong>Name:</strong> </label>
+            <input type="text" class="form-control" formControlName="ProcessName" required>
+          </div>
+          <div class="col-md-2"></div>
+          <!-- <div class="col-md-5 form-group">
+                                <label for="Vacancies"><strong>Vacancies</strong></label>
+                                <input type="number" class="form-control" formControlName="Vacancies" required>
+                            </div> -->
+          <div class="col-md-5 form-group">
+
+            <label for="adDate"><strong>Adverticed Date:</strong> </label>
+            <input type="date" formControlName="adDate" class="form-control" required>
+          </div>
+
+        </div>
+
+
+        <div class="row">
+          <!-- <div class="col-md-5 form-group">
+            <label for="DesignationId"><strong> Designation:</strong> </label>
+            <select class="form-control" formControlName="DesignationId" required>
+                          <option *ngFor="let designation of designations" [value]="designation.Id" >{{designation.Designation}}</option>
+                      </select>
+          </div> -->
+          <div class="col-md-5 form-group">
+            <!-- <label for="Vacancies"><strong>NoOf Designation</strong></label>
+            <input type="number" min="0" class="form-control" (change)="changeValue($event.target.value)" formControlName="noOfDesignation"
+              required> -->
+          </div>
+
+          <div class="col-md-2"></div>
+
+          <div class="col-md-5 form-group">
+            <label for="CreatedBy"><strong> Created By:</strong> </label>
+            <input type="text" formControlName="CreatedBy" class="form-control" [readonly]="true">
+          </div>
+        </div>
+        <div class="row"  formArrayName="items" *ngFor="let item of proccessForm.controls['items'].controls; let i = index">
+          <!-- *ngFor="let i of designs" -->
+<div class="row" [formGroupName]="i">
+          <div class="col-md-4 form-group" >
+            <label for="DesignationId"><strong> Designation:</strong> </label>
+
+            <select class="form-control" formControlName="DesignationId"   required>
+                          <option *ngFor="let designation of designations" [value]="designation.Id" >{{designation.Designation}}</option>
+            </select>
+          </div>
+          <div class="col-md-2 form-group">
+
+              <label for="vacancy"><strong>vacancy</strong></label>
+              <input type="number" class="form-control" formControlName="vacancy"  min="0" required>
+
+          </div>
+          <div class="col-md-6 form-group">
+            <label for="Add"><strong> Attached Advertice: </strong> </label>
+               <input type="file" formControlName="advertice"  style="background-color:white" accept="image/jpeg,image/gif,image/png,application/pdf"  (change)="uploadAdvertice($event)" >
+
+          </div>
+</div>
+        </div>
+<button type="button" (click)="addNext()">add next</button>
+        <div class="row">
+          <!-- <div class="col-md-5 form-group">
+           <label for="adDate"><strong>Adverticed Date:</strong> </label>
+          <input type="date" formControlName="adDate" class="form-control" required>
+          </div> -->
+          <div class="col-md-2 form-group">
+          </div>
+          <div class="col-md-5"></div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-12 form-group">
+            <label for="Comment"><strong> Comment:</strong></label>
+            <textarea type="text" rows="3" cols="15" class="form-control" formControlName="Comment" style="width: 850px;"></textarea>
+          </div>
+          <div class="col-md-0"></div>
+        </div>
+
+
+
+        <div class="row">
+          <div class="col-md-5 "></div>
+          <div class="col-md-2 form-group">
+            <button type="button" class="btn btn-outline-success" (click)="processCreate()">Submit</button>
+          </div>
+          <div class="col-md-5"></div>
+        </div>
+
+
+
+      </form>
+
+
+    </div>
+
+
+    <div class="col-1"></div>
+
+
+
+  </div>

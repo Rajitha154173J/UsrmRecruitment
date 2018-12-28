@@ -1,0 +1,100 @@
+<div class="page-title"></div>
+
+<div class="quiz" *ngIf="currentQuestin!=null">
+  <div class="digi-clock">{{ellapsedTime}}</div>
+
+  <div class="dividerLatest">
+      <h4>Question {{index+1}} of {{numberOfQz}}</h4>
+      <div class="gDot"></div>
+  </div>
+
+  <div class="question">{{currentQuestin.QuestionText}}</div>
+
+  <div class="mcq-answers">
+    <form [formGroup]="answerForm" (change)="selectAnswer()">
+      
+      <div class="answer">
+        <input id="SudegstionOne" type="radio" name="Mcq" value="1" formControlName="Mcq">
+        <label for="SudegstionOne">
+            {{currentQuestin.SudegstionOne}}
+        </label>
+      </div>
+
+      <div class="answer">
+        <input id="SudegstionTwo" type="radio" name="Mcq" value="2" formControlName="Mcq">
+        <label for="SudegstionTwo">
+            {{currentQuestin.SudegstionTwo}}
+        </label>
+      </div>
+
+      <div class="answer">
+        <input id="SudegstionThree" type="radio" name="Mcq" value="3" formControlName="Mcq">
+        <label for="SudegstionThree">
+            {{currentQuestin.SudegstionThree}}
+        </label>
+      </div>
+
+      <div class="answer">
+        <input id="SudegstionFour" type="radio" name="Mcq" value="4" formControlName="Mcq">
+        <label for="SudegstionFour">
+            {{currentQuestin.SudegstionFour}}
+        </label>
+      </div>
+      
+    </form>
+  </div>
+
+  <div *ngIf='numberOfQz-1!=index'>
+    <button class="btn" (click)="next()">Next Question</button>
+  </div>
+  <div *ngIf='numberOfQz-1==index'>
+    <button class="btn" data-toggle="modal" data-target="#submitMcqExamConfirmModal">Submit Exam</button>
+  </div>
+</div>
+
+<div id="loadingCircle" *ngIf="loading">
+  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+  <div>Loading</div>
+</div>
+
+<div class="quiz-result" *ngIf="mode">
+  <h2>Exam Completed</h2>
+  <circle-progress
+    percent="{{percentage}}"
+    [radius]="80"
+    [space]="3"
+    [outerStrokeWidth]="8"
+    outerStrokeColor="{{lineColor}}"
+    [innerStrokeColor]="'#dddddd'"
+    [innerStrokeWidth]="2"
+    [titleFontSize]="36"
+    [unitsFontSize]="36"
+    [subtitleFontSize]="14"
+    [showSubtitle]="false"
+    [animation]="true"
+    [animationDuration]="300">
+  </circle-progress>
+
+  <h3>Correct Answers</h3>
+  <div class="summary"><span>{{score}}</span> out of <span>{{numberOfQz}}</span></div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="submitMcqExamConfirmModal" tabindex="-1" role="dialog" aria-labelledby="submitMcqExamConfirmModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="submitMcqExamConfirmModalLabel">Submit Exam</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <h3>Are you sure you want to submit this exam?</h3>
+      </div>
+      <div class="modal-footer">
+        <button class="btn grey" data-dismiss="modal">Cancel</button>
+        <button class="btn" data-dismiss="modal" (click)="submit()">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
+

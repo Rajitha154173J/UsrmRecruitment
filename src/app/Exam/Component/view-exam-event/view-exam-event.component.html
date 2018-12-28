@@ -1,0 +1,12 @@
+<table>
+  <thead>
+    <th>Applicant Name</th>
+    <th></th>
+  </thead>
+  <tbody>
+    <tr *ngFor="let event of events">
+      <td >{{event.Applicant.ApplicantName}}</td>
+      <td><button [disabled]="!event.IsAttend && !event.IsMark" (click)="startMarking(event.Applicant.ApplicantId)">Mark</button></td>
+    </tr>
+  </tbody>
+</table>
