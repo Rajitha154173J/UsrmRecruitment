@@ -16,4 +16,8 @@ export class ProcessService {
     return this.http.get(this.baseURL+"GetAllProcesses");
   }
 
+  getProcessDesignations(id) {
+    return this.http.post(this.baseURL+'GetDesignationsByProcessId', id);
+    }
+
 }

@@ -16,6 +16,11 @@
   </div>
 </div>
 
+<div class="alert error" *ngIf="error">
+  <div class="close" (click)="closeMassege('error')">×</div>
+  <p><strong>Error!</strong>&nbsp; Exam Submisson failed. Try again.</p>
+</div>
+
 <div class="container">
   <div class="sixteen column">
     <div class="form">
@@ -43,8 +48,15 @@
       
         <div class="field">
         <label for="ProcessId"><b>Process:</b></label>
-          <select formControlName="ProcessId" class="text fixed-with valid" [ngClass]="displayFieldCss('ProcessId')">
+          <select (change)="getDesignation($event)" formControlName="ProcessId" class="text fixed-with valid" [ngClass]="displayFieldCss('ProcessId')">
             <option [value]="p.ProcessId" *ngFor="let p of process">{{p.ProcessName}}</option>
+          </select>
+        </div>
+
+        <div class="field" *ngIf="!hide">
+          <label for="ProcessId"><b>Designation:</b></label>
+          <select formControlName="DesignationId" class="text fixed-with valid">
+            <option *ngFor="let processDesignation of processDesignations" [value]=" processDesignation.designationId" >{{ processDesignation.Designation}}</option>
           </select>
         </div>
       

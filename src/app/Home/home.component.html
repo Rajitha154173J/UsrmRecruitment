@@ -9,7 +9,7 @@
   
   <div *ngIf="isEmmployee">
     <button routerLink="/allExamEvent">ExamEvent</button>
-    <button routerLink="/allExam">Exam</button>
+    <button routerLink="/allExam" *ngIf="isAdmin">Exam</button>
     <button routerLink="/employeeExam">Try Employee Exam</button>
   </div>
 </div>

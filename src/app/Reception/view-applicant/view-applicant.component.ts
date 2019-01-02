@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-view-applicant',
   templateUrl: './view-applicant.component.html',
-  // styleUrls: ['./view-applicant.component.css']
+  //styleUrls: ['./view-applicant.component.css']
 })
 export class ViewApplicantComponent implements OnInit {
 
@@ -30,7 +30,7 @@ export class ViewApplicantComponent implements OnInit {
     if(this.sharedApplicantService.getApplicantType()){
       this.selectedApplicant = this.sharedApplicantService.getSelectedExamApplicant();
     }else{
-      this.selectedApplicant = this.sharedApplicantService.getSelectedInterviewApplicant();
+      this.selectedApplicant = this.sharedApplicantService.getSelectedInterviewApplicant();  
     }
     console.log(this.selectedApplicant);
   }

@@ -1,0 +1,173 @@
+<div *ngIf="isLoad">
+  <!-- applicant detail -->
+  <p>{{applicantData.Applicant.ApplicantName}}</p>
+  <table>
+    <thead>
+      <th></th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Applicant Name</td>
+        <td>{{applicantData.Applicant.ApplicantName}}</td>
+      </tr>
+      <tr>
+        <td>NIC No</td>
+        <td>{{applicantData.Applicant.NIC}}</td>
+      </tr>
+      <tr>
+        <td>Mobile No</td>
+        <td>{{applicantData.Applicant.Mobile}}</td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>{{applicantData.Applicant.HomeAddress}}</td>
+      </tr>
+      <tr>
+        <td>Email</td>
+        <td>{{applicantData.Applicant.Email}}</td>
+      </tr>
+      <tr>
+        <td>Date Of Birth</td>
+        <td>{{setDate(applicantData.Applicant.DateOfBirth) | date: 'dd-MMM-yyyy'}}</td>
+      </tr>
+      <tr>
+        <td>Gender</td>
+        <td>{{applicantData.Applicant.Gender}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- exam Detail -->
+  <table>
+    <thead>
+      <th>Exam Name</th>
+      <th>Exam Date</th>
+      <th>Attend</th>
+      <th>Submit</th>
+      <th>Mark</th>
+      <th>Call</th>
+      <th>Mail</th>
+      <th>Result</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let exam of applicantData.Exams">
+        <td>{{exam.Exam.ExamName}}</td>
+        <td>{{setDate(exam.Exam.ExamDate) | date: 'dd-MMM-yyyy hh:mm:aa'}}</td>
+        <td *ngIf=exam.ExamApplicant.IsAttend>Attend</td>
+        <td *ngIf=!exam.ExamApplicant.IsAttend>Not Attend</td>
+        <td *ngIf=exam.ExamApplicant.IsSubmit>Submit</td>
+        <td *ngIf=!exam.ExamApplicant.IsSubmit>Not Submit</td>
+        <td *ngIf=exam.ExamApplicant.IsMark>Mark</td>
+        <td *ngIf=!exam.ExamApplicant.IsMark>Not Mark</td>
+        <td *ngIf=exam.ExamApplicant.IsCalled>Called</td>
+        <td *ngIf=!exam.ExamApplicant.IsCalled>Not Call</td>
+        <td *ngIf=exam.ExamApplicant.IsSendEmail>Mail Sent</td>
+        <td *ngIf=!exam.ExamApplicant.IsSendEmail>mail Not Send</td>
+        <td *ngIf="exam.ExamResult!=null">{{exam.ExamResult.Result}}</td>
+        <td *ngIf="exam.ExamResult==null"></td>
+        <td><button data-toggle="modal" data-target="#ManualMarkEnterModal"  (click)="setExamData(exam)" [disabled]="exam.ExamApplicant.IsMark || exam.ExamApplicant.IsAttend || exam.ExamApplicant.IsSubmit">Click</button></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- interview detail -->
+  <table>
+    <thead>
+      <th>Interview Name</th>
+      <th>Interview Date</th>
+      <th>Call</th>
+      <th>EMail</th>
+      <th>Attend</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let interview of applicantData.Interview">
+        <td>{{interview.Interview.InterviewName}}</td>
+        <td>{{setDate(interview.Interview.InterviewDate) | date: 'dd-MMM-yyyy hh:mm:aa'}}</td>
+        <td *ngIf=interview.Interview.IsCalled>Called</td>
+        <td *ngIf=!interview.Interview.IsCalled>Not Call</td>
+        <td *ngIf=interview.Interview.IsSendEmail>Mail Sent</td>
+        <td *ngIf=!interview.Interview.IsSendEmail>mail Not Send</td>
+        <td *ngIf=interview.Interview.IsMarked>Attend</td>
+        <td *ngIf=!interview.Interview.IsMarked>Not Attend</td>
+        <td><button data-toggle="modal" data-target="#InterviewMarkSheetModal"  (click)="setData(interview)" [disabled]="!interview.Interview.IsMarked">Click</button></td>
+        <td></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="InterviewMarkSheetModal" tabindex="-1" role="dialog" aria-labelledby="InterviewMarkSheetModalLabel" aria-hidden="true" *ngIf="isLoad">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="InterviewMarkSheetModalLabel">Interview Mark Sheet</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" *ngIf="markLoad">
+          <table>
+            <tbody>
+              <tr>
+                <td>InterviewerId</td>
+                <td>{{currentmarkSheet.MarkSheet.InterviewerId}}</td>
+              </tr>
+              <tr>
+                <td>Date</td>
+                <td>{{setDate(currentmarkSheet.MarkSheet.Date) | date: 'dd-MMM-yyyy hh:mm:aa'}}</td>
+              </tr>
+              <tr>
+                <td>Comments</td>
+                <td>{{currentmarkSheet.MarkSheet.Comments}}</td>
+              </tr>
+            </tbody>
+          </table>
+          <P>..............................................</P>
+          <table>
+            <thead>
+              <th>Subject</th>
+              <th>Score</th>
+              <th>Comment</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let mark of currentmarkSheet.MarkScors">
+                    <td>{{mark.SubjectName}}</td>
+                    <td>{{mark.Score}}</td>
+                    <td>{{mark.SubjectComments}}</td>
+                </tr>
+            </tbody>
+          </table> 
+        </div>
+        <div class="modal-footer" *ngIf="markLoad">
+          <button class="btn grey" data-dismiss="modal">Cancel</button>
+          <button class="btn" (click)="nextMarkSheet()" [disabled]="markShettIndex==currentInterview.Mark.length-1">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- manual mark enter model-->
+  <div class="modal fade" id="ManualMarkEnterModal" tabindex="-1" role="dialog" aria-labelledby="ManualMarkEnterModalLabel" aria-hidden="true" *ngIf="isLoad">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="ManualMarkEnterModalLabel">Enter Marks</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form [formGroup]="markForm" #ngMarkForm="ngForm">
+              <input type="number" formControlName="Marks">
+              <button class="btn grey" data-dismiss="modal">Cancel</button>
+              <button class="btn" type="button" data-dismiss="modal" (click)="manualEnterExamMarks(ngMarkForm)">Submit</button>
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>   
+      </div>
+    </div>
+  </div>
+

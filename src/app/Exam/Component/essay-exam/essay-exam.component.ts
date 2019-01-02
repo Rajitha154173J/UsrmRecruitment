@@ -98,6 +98,7 @@ export class EssayExamComponent implements OnInit {
   }
 
   submit(){
+    this.next();
     this.ExamService.submitAnswear(this.answers,this.examId,this.applicantId).subscribe((data:any)=>{
       console.log(data);
     })

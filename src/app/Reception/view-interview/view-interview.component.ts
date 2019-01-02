@@ -8,7 +8,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-view-interview',
   templateUrl: './view-interview.component.html',
- // styleUrls: ['./view-interview.component.css']
+  //styleUrls: ['./view-interview.component.css']
 })
 export class ViewInterviewComponent implements OnInit {
 
@@ -18,7 +18,7 @@ export class ViewInterviewComponent implements OnInit {
   errorMessage: string;
 
   constructor(protected ReceptService: receptService, protected router: Router, protected sharedApplicantService: SharedApplicantService) { }
-
+  
   ngOnInit() {
   }
 

@@ -1,4 +1,3 @@
-import {NgMultiSelectDropDownModule} from 'ng-multiselect-dropdown';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
@@ -42,14 +41,7 @@ import { ViewExamComponent } from './Reception/view-exam/view-exam.component';
 import { MyInterviewsComponent } from './Interview/my-interviews/my-interviews.component';
 import { MarkInterviewComponent } from './Interview/mark-interview/mark-interview.component';
 import { RecInterviewService } from './services/recInterview.service';
-import { RecApplicantComponent } from './Recruitment/component/rec-applicant/rec-applicant.component';
-import { ApplicantComponent } from './Recruitment/component/applicant/applicant.component';
-import { RecProcessComponent } from './Recruitment/component/rec-process/rec-process.component';
-import { EditApplicantComponent } from './Recruitment/component/edit-applicant/edit-applicant.component';
-import { ProcessComponent } from './Recruitment/component/process/process.component';
-import { EditProcessComponent } from './Recruitment/component/edit-process/edit-process.component';
-import { ProcessViewComponent } from './Recruitment/component/process-view/process-view.component';
-import { InterviewComponent } from './Recruitment/component/interview/interview.component';
+import { ApplicantProgressComponent } from './Recruitment/component/applicant-progress/applicant-progress.component';
 
 @NgModule({
   declarations: [
@@ -80,15 +72,8 @@ import { InterviewComponent } from './Recruitment/component/interview/interview.
     ViewExamComponent,
     MyInterviewsComponent,
     MarkInterviewComponent,
-    RecApplicantComponent,
-    ApplicantComponent,
-    RecProcessComponent,
-    EditApplicantComponent,
-    ProcessComponent,
-    EditProcessComponent,
-    ProcessViewComponent,
-    InterviewComponent,
-
+    ApplicantProgressComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -99,11 +84,9 @@ import { InterviewComponent } from './Recruitment/component/interview/interview.
     HttpModule,
     DpDatePickerModule,
     NgCircleProgressModule.forRoot(),
-    AngularEditorModule,
-    NgMultiSelectDropDownModule.forRoot()
-
+    AngularEditorModule
   ],
-  providers: [ QuestionService, SharedQuestionService, receptService , SharedApplicantService, RecInterviewService],
+  providers:[ QuestionService, SharedQuestionService, receptService , SharedApplicantService, RecInterviewService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

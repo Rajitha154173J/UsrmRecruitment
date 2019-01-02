@@ -14,6 +14,7 @@ export class AllExamComponent implements OnInit {
 
   exams:Exam[];
   exam:Exam;
+  deleteItem:any;
 
   constructor(private ExamService: ExamService,private router : Router) { }
 
@@ -30,10 +31,22 @@ export class AllExamComponent implements OnInit {
     this.router.navigate(['/editExam',id]);
   }
 
-  deleteExam(id){
+  deleteExam(){
     //this.router.navigate(['/deleteExam',id]);
-    this.ExamService.deleteExam(id).subscribe((data:any)=>{
-      console.log(data+" popup");
+    // this.ExamService.deleteExam(id).subscribe((data:any)=>{
+    //   console.log(data+" popup");
+    // },(err:HttpErrorResponse)=>{
+    //   this.router.navigate(['/error']);
+    // })
+    console.log(this.deleteItem);
+    this.ExamService.deleteExam(this.deleteItem).subscribe((data:any)=>{
+      console.log(data);
+      if(data==true){
+      window.location.reload();
+      }
+      else{
+        //this.deleteError=true;
+      }
     },(err:HttpErrorResponse)=>{
       this.router.navigate(['/error']);
     })
@@ -50,6 +63,11 @@ export class AllExamComponent implements OnInit {
   setDate(time){
        time=new Date(time);
        return time;
+  }
+
+  setDeleteItem(id){
+    this.deleteItem=id;
+    console.log(id);
   }
 
 }

@@ -21,6 +21,9 @@ export class AddExamComponent implements OnInit {
 
   private examForm : FormGroup;
   process:Process[];
+  processDesignations:any[];
+  hide:boolean=true;
+  error:boolean=false;
 
   datePickerConfig = {
     firstDayOfWeek:"mo",
@@ -35,7 +38,8 @@ export class AddExamComponent implements OnInit {
       Duration:[null, Validators.required],
       ProcessId:[null, Validators.required],
       LevelId:[null, Validators.required],
-      TypeId:[null, Validators.required]
+      TypeId:[null, Validators.required],
+      DesignationId:[null]
     });
 
     this.ProcessService.getAllProcess().subscribe((data:Process[])=>{
@@ -64,6 +68,9 @@ export class AddExamComponent implements OnInit {
         if(data==true){
           this.router.navigate(['/allExam']);
         }
+        else{
+          this.error=true;
+        }
       },(err : HttpErrorResponse)=>{
         this.router.navigate(['/error']);
       })
@@ -82,5 +89,26 @@ export class AddExamComponent implements OnInit {
       }
     });
   }
+
+
+  getDesignation(event) {
+    // console.log(this.proccesses[this.applicationForm.value['index']].processDesignations);
+    // console.log(event.target.value);
+    this.ProcessService.getProcessDesignations(event.target.value).subscribe((res: any) => {
+    this.processDesignations = res;
+    
+    if (this.processDesignations.length === 0) {
+    this.hide = true;
+    } else {
+    this.hide = false;
+    }
+    });
+    }
+
+    closeMassege(msg){
+      if(msg=="error"){
+        this.error=false;
+      }
+    }
 
 }

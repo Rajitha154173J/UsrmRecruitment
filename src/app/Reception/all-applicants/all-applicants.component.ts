@@ -13,7 +13,7 @@ import * as $ from 'jquery';
 @Component({
   selector: 'app-all-applicants',
   templateUrl: './all-applicants.component.html',
-  // styleUrls: ['./all-applicants.component.css']
+ // styleUrls: ['./all-applicants.component.css']
 })
 export class AllApplicantsComponent implements OnInit {
 

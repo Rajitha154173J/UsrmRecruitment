@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   isLoad:boolean=false;
   isEmmployee:boolean=false;
+  isAdmin:boolean=false;
   private externalLogin : FormGroup;
   applicant:Applicant;
 
@@ -28,13 +29,22 @@ export class HomeComponent implements OnInit {
       Email:['']
     });
 
+    localStorage.removeItem('IsEmployeeUSRec');
+    localStorage.removeItem('IsAdminUSRec');
+
     this.EmployeeService.getGetResourceCode().subscribe((data:any)=>{
       console.log(data);
       this.isLoad=true;
+      localStorage.setItem('IsEmployeeUSRec',data);
       if(data!=0){
         this.isEmmployee=true;
         //this.router.navigate(['/startExam']);
       }
+    });
+
+    this.EmployeeService.checkIsAdmin().subscribe((data:any)=>{
+      this.isAdmin=data;
+      localStorage.setItem('IsAdminUSRec',data);
     })
   }
 

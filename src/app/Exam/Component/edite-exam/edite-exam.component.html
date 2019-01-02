@@ -16,6 +16,11 @@
   </div>
 </div>
 
+<div class="alert error" *ngIf="error">
+  <div class="close" (click)="closeMassege('error')">×</div>
+  <p><strong>Error!</strong>&nbsp; Exam Submisson failed. Try again.</p>
+</div>
+
 <div class="container">
   <div class="sixteen column">
     <div class="form">

@@ -1,4 +1,3 @@
-import { RecApplicantComponent } from './Recruitment/component/rec-applicant/rec-applicant.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -28,116 +27,93 @@ import { AllApplicantsComponent } from './Reception/all-applicants/all-applicant
 
 import { MyInterviewsComponent } from './Interview/my-interviews/my-interviews.component';
 import { MarkInterviewComponent } from './Interview/mark-interview/mark-interview.component';
-import { RecProcessComponent } from './Recruitment/component/rec-process/rec-process.component';
-import { ApplicantComponent } from './Recruitment/component/applicant/applicant.component';
-import { EditApplicantComponent } from './Recruitment/component/edit-applicant/edit-applicant.component';
-import { ProcessComponent } from './Recruitment/component/process/process.component';
-import { EditProcessComponent } from './Recruitment/component/edit-process/edit-process.component';
-import { ProcessViewComponent } from './Recruitment/component/process-view/process-view.component';
-import { InterviewComponent } from './Recruitment/component/interview/interview.component';
+
+import { ApplicantProgressComponent } from './Recruitment/component/applicant-progress/applicant-progress.component';
+
+import { AuthGuard } from "src/app/auth.guard";
+import { RoleGuard } from "src/app/role.guard";
 
 const routes: Routes = [
   {
-    path: 'add-questions', component: AddQuestionComponent,
+    path:'add-questions' ,component:AddQuestionComponent,canActivate: [AuthGuard]
   },
   {
-    path: 'edit-questions', component: EditQuestionsComponent,
+    path:'edit-questions' ,component:EditQuestionsComponent,canActivate: [AuthGuard]
+   },
+  {
+    path:'all-questions' ,component:AllQuestionsComponent,canActivate: [AuthGuard]
   },
   {
-    path: 'all-questions', component: AllQuestionsComponent,
+    path:'view-questions' ,component:ViewQuestionsComponent,canActivate: [AuthGuard]
   },
   {
-    path: 'view-questions', component: ViewQuestionsComponent,
+    path:'recept-applicants' ,component:AllApplicantsComponent,canActivate: [AuthGuard]
   },
   {
-    path: 'recept-applicants', component: AllApplicantsComponent,
+    path:'mark-interview' ,component:MarkInterviewComponent,canActivate: [AuthGuard]
   },
   {
-    path: 'mark-interview', component: MarkInterviewComponent,
+    path:'my-interview' ,component:MyInterviewsComponent,canActivate: [AuthGuard]
   },
   {
-    path: 'my-interview', component: MyInterviewsComponent,
+    path:'editExam/:id' ,component:ExamHomeComponent,
+    children:[{path:'',component:EditeExamComponent}],canActivate: [AuthGuard]
   },
   {
-    path: 'editExam/:id', component: ExamHomeComponent,
-    children: [{ path: '', component: EditeExamComponent }]
+    path:'deleteExam/:id' ,component:ExamHomeComponent,
+    children:[{path:'',component:DeleteExamComponent}]
   },
   {
-    path: 'deleteExam/:id', component: ExamHomeComponent,
-    children: [{ path: '', component: DeleteExamComponent }]
+    path:'' ,redirectTo:'/home',pathMatch:'full'
   },
   {
-    path: '', redirectTo: '/home', pathMatch: 'full'
+    path:'allExam',component:ExamHomeComponent,
+    children:[{path:'',component:AllExamComponent}],canActivate: [AuthGuard,RoleGuard]
   },
   {
-    path: 'allExam', component: ExamHomeComponent,
-    children: [{ path: '', component: AllExamComponent }]
+    path:'allExamEvent',component:ExamHomeComponent,
+    children:[{path:'',component:AllExamEventComponent}],canActivate: [AuthGuard]
   },
   {
-    path: 'allExamEvent', component: ExamHomeComponent,
-    children: [{ path: '', component: AllExamEventComponent }]
+    path:'addExam',component:ExamHomeComponent,
+    children:[{path:'',component:AddExamComponent}],canActivate: [AuthGuard,RoleGuard]
   },
   {
-    path: 'addExam', component: ExamHomeComponent,
-    children: [{ path: '', component: AddExamComponent }]
+    path:'examDetail/:id',component:ExamHomeComponent,
+    children:[{path:'',component:ExamDetailComponent}],canActivate: [AuthGuard,RoleGuard]
   },
   {
-    path: 'examDetail/:id', component: ExamHomeComponent,
-    children: [{ path: '', component: ExamDetailComponent }]
+    path:'examEvent/:id',component:ExamHomeComponent,
+    children:[{path:'',component:ViewExamEventComponent}],canActivate: [AuthGuard]
   },
   {
-    path: 'examEvent/:id', component: ExamHomeComponent,
-    children: [{ path: '', component: ViewExamEventComponent }]
+    path:'evaluate',component:ExamHomeComponent,
+    children:[{path:'',component:EvaluateExamComponent}],canActivate: [AuthGuard]
+  },
+  {path: 'home' , component: HomeComponent},
+  {
+    path:'startExam/:id',component:ExaStartPageComponent
   },
   {
-    path: 'evaluate', component: ExamHomeComponent,
-    children: [{ path: '', component: EvaluateExamComponent }]
-  },
-  { path: 'home', component: HomeComponent },
-  {
-    path: 'startExam/:id', component: ExaStartPageComponent
+    path:'mExam',component:McqExamComponent
   },
   {
-    path: 'mExam', component: McqExamComponent
+    path:'eExam',component:EssayExamComponent
   },
   {
-    path: 'eExam', component: EssayExamComponent
+    path:'error',component:ErrorComponent
   },
   {
-    path: 'error', component: ErrorComponent
+    path:'result',component:ExamHomeComponent,
+    children:[{path:'',component:ExamSubmitPageComponent}],canActivate: [AuthGuard]
   },
   {
-    path: 'result', component: ExamHomeComponent,
-    children: [{ path: '', component: ExamSubmitPageComponent }]
+    path:'employeeExam',component:ExamHomeComponent,
+    children:[{path:'',component:EmployeeExamComponent}],canActivate: [AuthGuard]
   },
   {
-    path: 'employeeExam', component: ExamHomeComponent,
-    children: [{ path: '', component: EmployeeExamComponent }]
-  },
-  {
-    path: 'rec-applicant', component: RecApplicantComponent
-  },
-  {
-    path: 'recruit-process', component: RecProcessComponent
-  },
-  {
-    path: 'applicant', component: ApplicantComponent
-  },
-  {
-    path: 'edit-applicant/:id', component: EditApplicantComponent
-  },
-  {
-    path: 'process', component: ProcessComponent
-  },
-  {
-    path: 'edit-process/:id', component: EditProcessComponent
-  },
-  {
-    path: 'view-process', component: ProcessViewComponent
-  },
-  {
-    path: 'add-interview', component: InterviewComponent
-  },
+    path:'apllicant-progress',component:ApplicantProgressComponent,canActivate: [AuthGuard,RoleGuard]
+  }
 ];
 
 @NgModule({

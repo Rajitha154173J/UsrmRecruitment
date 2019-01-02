@@ -12,7 +12,7 @@ import { Subject } from '../../Entities/Subject';
 @Component({
   selector: 'app-mark-interview',
   templateUrl: './mark-interview.component.html',
-//  styleUrls: ['./mark-interview.component.css']
+  //styleUrls: ['./mark-interview.component.css']
 })
 export class MarkInterviewComponent implements OnInit {
 

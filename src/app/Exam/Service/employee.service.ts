@@ -20,4 +20,8 @@ export class EmployeeService {
   getGetResourceCode(){
     return this.http.get(this.homeURL+"GetResourceCode");
   }
+
+  checkIsAdmin(){
+    return this.http.get(this.baseURL+"checkIsAdmin");
+  }
 }

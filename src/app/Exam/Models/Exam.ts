@@ -14,4 +14,7 @@ export class Exam{
     public TypeId : number;
     public Created : string;
     public Edited : string;
+    public DesignationId:number;
+    public ProcessName:string;
+    public DesignationName:string;
 }

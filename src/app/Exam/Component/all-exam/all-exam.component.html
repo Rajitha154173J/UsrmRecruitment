@@ -33,7 +33,7 @@
           <td>{{setDate(exam.ExamDate) | date: 'dd-MMM-yyyy hh:mm:aa'}}</td>
           <td>{{exam.Duration}}</td>
           <td>{{exam.created}}</td>
-          <td><a data-toggle="modal" data-target="#deleteExamConfirmModal"><i class="icon-trash"></i></a></td><!--(click)="deleteExam(exam.ExamId)"-->
+          <td><a data-toggle="modal" data-target="#deleteExamConfirmModal" (click)="setDeleteItem(exam.ExamId)"><i class="icon-trash"></i></a></td><!--(click)="setDeleteItem(exam.ExamId)"-->
           <td><a (click)="editExam(exam.ExamId)"><i class="icon-edit"></i></a></td>
           <td><a (click)="examDetail(exam.ExamId)"><i class="icon-eye-open"></i></a></td>
         </tr>
@@ -55,7 +55,7 @@
       </div>
       <div class="modal-footer">
         <button class="btn grey" data-dismiss="modal">Cancel</button>
-        <button class="btn">Delete</button>
+        <button class="btn" (click)="deleteExam()">Delete</button>
       </div>
     </div>
   </div>

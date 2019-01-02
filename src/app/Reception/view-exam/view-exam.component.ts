@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-view-exam',
   templateUrl: './view-exam.component.html',
- // styleUrls: ['./view-exam.component.css']
+  //styleUrls: ['./view-exam.component.css']
 })
 export class ViewExamComponent implements OnInit {
 
@@ -19,7 +19,7 @@ export class ViewExamComponent implements OnInit {
   errorMessage: string;
 
   constructor(protected ReceptService: receptService, protected router: Router, protected sharedApplicantService: SharedApplicantService) { }
-
+  
   ngOnInit() {
   }
 

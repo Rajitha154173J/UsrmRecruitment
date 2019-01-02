@@ -31,6 +31,7 @@ export class EditeExamComponent implements OnInit {
   private examForm : FormGroup;
   process:Process[];
   exam:Exam;
+  error:boolean=false;
 
   datePickerConfig = {
     firstDayOfWeek:"mo",
@@ -95,10 +96,18 @@ export class EditeExamComponent implements OnInit {
     this.ExamService.editExam(this.exam).subscribe((data:any)=>{
       console.log(data);
       if(data==true)
-      this.router.navigate(['/allExam']);
+         this.router.navigate(['/allExam']);
+      else
+         this.error=true;
     },(err : HttpErrorResponse)=>{
       this.router.navigate(['/error']);
     })
+  }
+
+  closeMassege(msg){
+    if(msg=="error"){
+      this.error=false;
+    }
   }
 
 }
